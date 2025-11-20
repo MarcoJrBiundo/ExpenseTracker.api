@@ -1,75 +1,86 @@
-ExpenseTracker.Api/bin/Debug/net8.0/appsettings.Development.json
-ExpenseTracker.Api/bin/Debug/net8.0/appsettings.json
-ExpenseTracker.Api/bin/Debug/net8.0/ExpenseTracker.Api
-ExpenseTracker.Api/bin/Debug/net8.0/ExpenseTracker.Api.deps.json
-ExpenseTracker.Api/bin/Debug/net8.0/ExpenseTracker.Api.dll
-ExpenseTracker.Api/bin/Debug/net8.0/ExpenseTracker.Api.pdb
-ExpenseTracker.Api/bin/Debug/net8.0/ExpenseTracker.Api.runtimeconfig.json
-ExpenseTracker.Api/bin/Debug/net8.0/ExpenseTracker.Api.staticwebassets.endpoints.json
-ExpenseTracker.Api/bin/Debug/net8.0/Microsoft.OpenApi.dll
-ExpenseTracker.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
-ExpenseTracker.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
-ExpenseTracker.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
-ExpenseTracker.Api/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-ExpenseTracker.Api/obj/Debug/net8.0/apphost
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseT.EDBB986E.Up2Date
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.AssemblyInfo.cs
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.AssemblyInfoInputs.cache
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.assets.cache
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.csproj.AssemblyReference.cache
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.csproj.CoreCompileInputs.cache
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.csproj.FileListAbsolute.txt
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.dll
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.GeneratedMSBuildEditorConfig.editorconfig
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.genruntimeconfig.cache
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.GlobalUsings.g.cs
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.MvcApplicationPartsAssemblyInfo.cache
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.MvcApplicationPartsAssemblyInfo.cs
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.pdb
-ExpenseTracker.Api/obj/Debug/net8.0/ExpenseTracker.Api.sourcelink.json
-ExpenseTracker.Api/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
-ExpenseTracker.Api/obj/Debug/net8.0/rjsmrazor.dswa.cache.json
-ExpenseTracker.Api/obj/Debug/net8.0/rpswa.dswa.cache.json
-ExpenseTracker.Api/obj/Debug/net8.0/staticwebassets.build.endpoints.json
-ExpenseTracker.Api/obj/Debug/net8.0/staticwebassets.build.json
-ExpenseTracker.Api/obj/Debug/net8.0/staticwebassets.build.json.cache
-ExpenseTracker.Api/obj/Debug/net8.0/ref/ExpenseTracker.Api.dll
-ExpenseTracker.Api/obj/Debug/net8.0/refint/ExpenseTracker.Api.dll
-ExpenseTracker.Api/obj/ExpenseTracker.Api.csproj.nuget.dgspec.json
-ExpenseTracker.Api/obj/ExpenseTracker.Api.csproj.nuget.g.props
-ExpenseTracker.Api/obj/ExpenseTracker.Api.csproj.nuget.g.targets
-ExpenseTracker.Api/obj/project.assets.json
-ExpenseTracker.Api/obj/project.nuget.cache
-ExpenseTracker.Application/obj/ExpenseTracker.Application.csproj.nuget.dgspec.json
-ExpenseTracker.Application/obj/ExpenseTracker.Application.csproj.nuget.g.props
-ExpenseTracker.Application/obj/ExpenseTracker.Application.csproj.nuget.g.targets
-ExpenseTracker.Application/obj/project.assets.json
-ExpenseTracker.Application/obj/project.nuget.cache
-ExpenseTracker.Application/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
-ExpenseTracker.Application/obj/Debug/net9.0/ExpenseTracker.Application.AssemblyInfo.cs
-ExpenseTracker.Application/obj/Debug/net9.0/ExpenseTracker.Application.AssemblyInfoInputs.cache
-ExpenseTracker.Application/obj/Debug/net9.0/ExpenseTracker.Application.assets.cache
-ExpenseTracker.Application/obj/Debug/net9.0/ExpenseTracker.Application.GeneratedMSBuildEditorConfig.editorconfig
-ExpenseTracker.Application/obj/Debug/net9.0/ExpenseTracker.Application.GlobalUsings.g.cs
-ExpenseTracker.Domain/obj/ExpenseTracker.Domain.csproj.nuget.dgspec.json
-ExpenseTracker.Domain/obj/ExpenseTracker.Domain.csproj.nuget.g.props
-ExpenseTracker.Domain/obj/ExpenseTracker.Domain.csproj.nuget.g.targets
-ExpenseTracker.Domain/obj/project.assets.json
-ExpenseTracker.Domain/obj/project.nuget.cache
-ExpenseTracker.Domain/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
-ExpenseTracker.Domain/obj/Debug/net9.0/ExpenseTracker.Domain.AssemblyInfo.cs
-ExpenseTracker.Domain/obj/Debug/net9.0/ExpenseTracker.Domain.AssemblyInfoInputs.cache
-ExpenseTracker.Domain/obj/Debug/net9.0/ExpenseTracker.Domain.assets.cache
-ExpenseTracker.Domain/obj/Debug/net9.0/ExpenseTracker.Domain.GeneratedMSBuildEditorConfig.editorconfig
-ExpenseTracker.Domain/obj/Debug/net9.0/ExpenseTracker.Domain.GlobalUsings.g.cs
-ExpenseTracker.Infrastructure/obj/ExpenseTracker.Infrastructure.csproj.nuget.dgspec.json
-ExpenseTracker.Infrastructure/obj/ExpenseTracker.Infrastructure.csproj.nuget.g.props
-ExpenseTracker.Infrastructure/obj/ExpenseTracker.Infrastructure.csproj.nuget.g.targets
-ExpenseTracker.Infrastructure/obj/project.assets.json
-ExpenseTracker.Infrastructure/obj/project.nuget.cache
-ExpenseTracker.Infrastructure/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
-ExpenseTracker.Infrastructure/obj/Debug/net9.0/ExpenseTracker.Infrastructure.AssemblyInfo.cs
-ExpenseTracker.Infrastructure/obj/Debug/net9.0/ExpenseTracker.Infrastructure.AssemblyInfoInputs.cache
-ExpenseTracker.Infrastructure/obj/Debug/net9.0/ExpenseTracker.Infrastructure.assets.cache
-ExpenseTracker.Infrastructure/obj/Debug/net9.0/ExpenseTracker.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-ExpenseTracker.Infrastructure/obj/Debug/net9.0/ExpenseTracker.Infrastructure.GlobalUsings.g.cs
+###############################
+# .NET / C# Git Ignore
+# Simplified best-practice patterns for build artifacts,
+# user-specific files, caches, and secrets.
+###############################
+
+# Build output
+bin/
+obj/
+
+# Visual Studio / VS Code / IDE specifics
+.vs/
+.idea/
+*.user
+*.suo
+*.rsuser
+*.DotSettings.user
+
+# OS / tooling cruft
+.DS_Store
+Thumbs.db
+
+# Logs & diagnostics
+*.log
+*.tlg
+*.svclog
+
+# Coverage / test results
+coverage/
+*.coverage
+*.coveragexml
+TestResult*/
+
+# NuGet packages (generated)
+*.nupkg
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Publish output
+**/publish/
+
+# Generated code & caches
+*.g.cs
+*.AssemblyInfo.cs
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.cache
+*/*/staticwebassets.build.json*
+*.dswa.cache.json
+
+# Build intermediates (optional lump ignores)
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+*.assets.cache
+ref/
+refint/
+
+# Local configuration (keep base appsettings.json committed)
+appsettings.Development.json
+appsettings.*.Local.json
+
+# Dotnet user secrets directory (if used at solution root)
+**/secrets.json
+
+# Rider / ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# SourceLink & tooling artifacts
+*.sourcelink.json
+
+# Prevent ignoring required project files
+!**/*.csproj
+!**/*.sln
+
+###############################
+# End of file
+###############################
