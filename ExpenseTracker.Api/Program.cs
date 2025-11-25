@@ -9,9 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<ErrorHandlingMiddleware>();
-
-
 builder.Services.AddInfrastructure(builder.Configuration );
 builder.Services.AddApplication();
 
@@ -23,7 +20,7 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var app = builder.Build();
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
+
 app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
@@ -33,6 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

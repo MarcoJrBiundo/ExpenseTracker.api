@@ -1,6 +1,7 @@
 using ExpenseTracker.Application.Common.Results;
+using ExpenseTracker.Application.Expenses.Dtos;
+using ExpenseTracker.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace ExpenseTracker.Application.Expenses.Commands.CreateExpense;
 
@@ -11,4 +12,4 @@ public record CreateExpenseCommand(
     string Category,
     DateTime Date,
     string? Description
-) : IRequest<Result>;
+) : IRequest<Result<ExpenseDto>>;
