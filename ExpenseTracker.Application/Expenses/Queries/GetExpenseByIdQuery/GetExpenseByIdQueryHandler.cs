@@ -1,4 +1,5 @@
 using AutoMapper;
+using ExpenseTracker.Application.Common.Results;
 using ExpenseTracker.Application.Expenses.Dtos;
 using ExpenseTracker.Domain.Repositories;
 using MediatR;
@@ -10,14 +11,14 @@ public sealed class GetExpenseByIdQueryHandler(
     ILogger<GetExpenseByIdQueryHandler> logger,
     IMapper mapper,
     IExpensesRepository expenseRepository)
-    : IRequestHandler<GetExpenseByIdQuery, ExpenseDto?>
+    : IRequestHandler<GetExpenseByIdQuery, Result<ExpenseDto?>>
 {
     private readonly ILogger<GetExpenseByIdQueryHandler> _logger = logger;
     private readonly IMapper _mapper = mapper;
     private readonly IExpensesRepository _expenseRepository = expenseRepository;
 
     
-    public async Task<ExpenseDto?> Handle(
+    public async Task<Result<ExpenseDto?>> Handle(
         GetExpenseByIdQuery request,
         CancellationToken cancellationToken)
     {
@@ -35,13 +36,12 @@ public sealed class GetExpenseByIdQueryHandler(
                 "Expense not found or not accessible for UserId: {UserId}, ExpenseId: {ExpenseId}",
                 request.UserId, request.ExpenseId);
 
-            return null;
+            return Result<ExpenseDto>.Fail("Expense not found.");
         }
 
         _logger.LogInformation(
             "Retrieved expense for UserId: {UserId}, ExpenseId: {ExpenseId}",
             request.UserId, request.ExpenseId);
-
-        return _mapper.Map<ExpenseDto>(expense);
+         return Result<ExpenseDto>.Ok(_mapper.Map<ExpenseDto>(expense));
     }
 }

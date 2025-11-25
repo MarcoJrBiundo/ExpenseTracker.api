@@ -16,9 +16,17 @@ public static class ServiceCollectionExtensions
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration   configuration)
     {
 
-        var connectionString = configuration.GetConnectionString("RestaurantsDb");
-        services.AddDbContext<ExpensesDbContext>(options => options.UseSqlite(connectionString).EnableSensitiveDataLogging());
+        var connectionString = configuration.GetConnectionString("ExpenseTrackerDb")
+            ?? throw new InvalidOperationException("Connection string 'ExpenseTrackerDb' not found.");
+
+       services.AddDbContext<ExpensesDbContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+        });
+
+        
         services.AddScoped<IExpensesRepository, ExpensesRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
 

@@ -2,7 +2,6 @@
 
 using ExpenseTracker.Infrastructure.Extensions;
 using ExpenseTracker.Application.Extensions;
-using ExpenseTracker.API.Middlewares;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<ErrorHandlingMiddle>();
+builder.Services.AddTransient<ErrorHandlingMiddleware>();
 
 
 builder.Services.AddInfrastructure(builder.Configuration );
@@ -24,7 +23,7 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var app = builder.Build();
 
-app.UseMiddleware<ErrorHandlingMiddle>();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())

@@ -1,21 +1,49 @@
-using System;
+using System.Net;
+using System.Text.Json;
 
-namespace ExpenseTracker.API.Middlewares;
-
-public class ErrorHandlingMiddle(ILogger<ErrorHandlingMiddle> logger) : IMiddleware
+public class ErrorHandlingMiddleware
 {
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    private readonly RequestDelegate _next;
+    private readonly ILogger<ErrorHandlingMiddleware> _logger;
+
+    public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
+    {
+        _next = next;
+        _logger = logger;
+    }
+
+    public async Task Invoke(HttpContext context)
     {
         try
         {
-            await next.Invoke(context);
+            await _next(context);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "An unhandled exception has occurred.");
-            context.Response.StatusCode = 500;
-            await context.Response.WriteAsJsonAsync("Error");
+            _logger.LogError(ex, "Unhandled exception while processing request");
+
+            await HandleExceptionAsync(context, ex);
         }
     }
 
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        var statusCode = (int)HttpStatusCode.InternalServerError;
+
+        var problem = new
+        {
+            type = "https://httpstatuses.com/500",
+            title = "An unexpected error occurred.",
+            status = statusCode,
+            detail = exception.Message,
+            traceId = context.TraceIdentifier
+        };
+
+        var json = JsonSerializer.Serialize(problem);
+
+        context.Response.ContentType = "application/problem+json";
+        context.Response.StatusCode = statusCode;
+
+        return context.Response.WriteAsync(json);
+    }
 }

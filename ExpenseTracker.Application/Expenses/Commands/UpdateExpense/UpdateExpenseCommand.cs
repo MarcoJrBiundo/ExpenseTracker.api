@@ -1,4 +1,6 @@
+using ExpenseTracker.Application.Common.Results;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace ExpenseTracker.Application.Expenses.Commands.UpdateExpense;
 
@@ -11,4 +13,4 @@ public record UpdateExpenseCommand
     string Category,
     string? Description,
     DateTime Date
-):  IRequest<bool>;
+):  IRequest<Result>;

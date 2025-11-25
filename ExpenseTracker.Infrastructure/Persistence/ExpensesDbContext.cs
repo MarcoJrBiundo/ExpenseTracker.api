@@ -1,13 +1,41 @@
 using System;
+using ExpenseTracker.Domain.Common;
 using ExpenseTracker.Domain.Entities;
+using ExpenseTracker.Infrastructure.Persistence.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Infrastructure.Persistence;
 
 public class ExpensesDbContext(DbContextOptions<ExpensesDbContext> options) : DbContext(options)
 {
-    internal DbSet<Expense> Expenses { get; set; }
+    public DbSet<Expense> Expenses { get; set; }
 
     
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ExpenseConfiguration).Assembly);
+        base.OnModelCreating(modelBuilder);
+    }   
+
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+{
+    var utcNow = DateTime.UtcNow;
+
+    foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+    {
+        if (entry.State == EntityState.Added)
+        {
+            entry.Entity.SetCreated(utcNow);
+            entry.Entity.SetUpdated(utcNow);
+        }
+        else if (entry.State == EntityState.Modified)
+        {
+            entry.Entity.SetUpdated(utcNow);
+        }
+    }
+
+    return base.SaveChangesAsync(cancellationToken);
+}
 }

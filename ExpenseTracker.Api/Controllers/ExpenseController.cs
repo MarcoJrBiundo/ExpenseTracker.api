@@ -11,58 +11,93 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTracker.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class ExpenseController(IMediator mediator) : ControllerBase
+    [Route("api/users/{userId:guid}/expenses")]
+    public class ExpenseController : ControllerBase
     {
-        
-        
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetExpensesByUserIdAsync(Guid userId)
+        private readonly IMediator _mediator;
+
+        public ExpenseController(IMediator mediator)
         {
-              var expenses = await mediator.Send(new GetExpensesByUserQuery(userId));
+            _mediator = mediator;
+        }
+
+        [HttpGet("{userId : guid}")]
+        public async Task<IActionResult> GetExpensesByUserIdAsync(Guid userId, CancellationToken cancellationToken)
+        {
+              var expenses = await _mediator.Send(new GetExpensesByUserQuery(userId), cancellationToken);
              return Ok(expenses);
         }
 
         
         [HttpGet("{userId}/{expenseId}")]
-        public async Task<IActionResult> GetExpenseByIdAsync(Guid userId, Guid expenseId)
+        public async Task<IActionResult> GetExpenseByIdAsync(Guid userId, Guid expenseId, CancellationToken cancellationToken)
         {
-             var expense = await mediator.Send(new GetExpenseByIdQuery(userId, expenseId));
+             var expense = await _mediator.Send(new GetExpenseByIdQuery(userId, expenseId), cancellationToken);
              return Ok(expense);
         }   
       
         [HttpPost]
-        public async Task<IActionResult> CreateExpenseAsync([FromBody] CreateExpenseRequestDto request)
+        public async Task<IActionResult> CreateExpenseAsync([FromBody] CreateExpenseRequestDto request, CancellationToken cancellationToken)
         {
-            var expense = await mediator.Send(new CreateExpenseCommand(  request.UserId,
+            var expense = await _mediator.Send(new CreateExpenseCommand(  request.UserId,
                 request.Amount,
                 request.Currency,
                 request.Category,
                 request.Date,
-                request.Description ));
+                request.Description ), cancellationToken);
              return Ok(expense);
         }
        
-        [HttpPut("{expenseId}")]
-        public  async Task<IActionResult> UpdateExpense(int expenseId, [FromBody] ExpenseDto request)
+        [HttpPut("{expenseId:guid}")]
+        public  async Task<IActionResult> UpdateExpense(
+           [FromRoute] Guid UserId, 
+           [FromRoute] Guid expenseId,
+           [FromBody] ExpenseDto request,
+           CancellationToken cancellationToken)
         {
-            var expense = await mediator.Send(new UpdateExpenseCommand(  request.UserId,
-            request.Id,
-            request.Amount,
-            request.Currency,
-            request.Category,
-            request.Description,
-            request.Date));
-             return Ok(expense);
+
+            if (request.Id != Guid.Empty && request.Id != expenseId)
+            {
+                return BadRequest("Route expenseId does not match body Id.");
+            }
+
+         var command = new UpdateExpenseCommand(
+            UserId: UserId,
+            ExpenseId: expenseId,
+            Amount: request.Amount,
+            Currency: request.Currency,
+            Category: request.Category,
+            Description: request.Description,
+            Date: request.Date);
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (!result.Success)
+        {
+            return NotFound(result.ErrorMessage);
+        }
+
+        return NoContent();
         }
      
-
-        [HttpDelete("{expenseId}")]
-        public async Task<IActionResult> DeleteExpense(Guid userId, Guid expenseId)
+    [HttpDelete("{expenseId:guid}")]
+        public async Task<IActionResult> DeleteExpense(
+            [FromRoute] Guid userId,
+            [FromRoute] Guid expenseId,
+            CancellationToken cancellationToken)
         {
-             var expense = await mediator.Send(new DeleteExpenseCommand(userId, expenseId));
-             return Ok(expense);
+            var command = new DeleteExpenseCommand(userId, expenseId);
+
+            var result = await _mediator.Send(command, cancellationToken);
+
+            if (!result.Success)
+            {
+                return NotFound(result.ErrorMessage);
+            }
+
+            return NoContent();
         }
+
     }
 }

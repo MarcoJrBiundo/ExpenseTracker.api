@@ -1,16 +1,18 @@
+using ExpenseTracker.Application.Common.Results;
 using ExpenseTracker.Domain.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.Expenses.Commands.UpdateExpense;
 
-public sealed class UpdateExpenseCommandHandler(ILogger<UpdateExpenseCommandHandler> logger, IExpensesRepository expenseRepository, IUnitOfWork unitOfWork) : IRequestHandler<UpdateExpenseCommand, bool>
+public sealed class UpdateExpenseCommandHandler(ILogger<UpdateExpenseCommandHandler> logger, IExpensesRepository expenseRepository, IUnitOfWork unitOfWork) : IRequestHandler<UpdateExpenseCommand, Result>
 {
     private readonly ILogger<UpdateExpenseCommandHandler> _logger = logger;
     private readonly IExpensesRepository _expenseRepository = expenseRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public async Task<bool> Handle(UpdateExpenseCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateExpenseCommand request, CancellationToken cancellationToken)
     {
 
         _logger.LogInformation(
@@ -25,7 +27,7 @@ public sealed class UpdateExpenseCommandHandler(ILogger<UpdateExpenseCommandHand
                 "Expense not found or not accessible for UserId: {UserId}, ExpenseId: {ExpenseId}",
                 request.UserId,
                 request.ExpenseId);
-            return false;
+            return Result.Fail("Expense not found.");
         }
 
         expense.Amount = request.Amount;
@@ -41,6 +43,6 @@ public sealed class UpdateExpenseCommandHandler(ILogger<UpdateExpenseCommandHand
             request.ExpenseId,
             request.UserId);
             
-        return true;
+        return Result.Ok();
     }
 }

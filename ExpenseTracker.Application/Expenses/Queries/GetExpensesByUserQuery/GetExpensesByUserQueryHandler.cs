@@ -5,18 +5,19 @@ using MediatR;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using ExpenseTracker.Domain.Repositories;
+using ExpenseTracker.Application.Common.Results;
 
 public sealed class GetExpensesByUserQueryHandler(
     ILogger<GetExpensesByUserQueryHandler> logger, 
     IMapper mapper, 
     IExpensesRepository expenseRepository) 
-    : IRequestHandler<GetExpensesByUserQuery, IEnumerable<ExpenseDto>>
+    : IRequestHandler<GetExpensesByUserQuery, Result<IEnumerable<ExpenseDto>>>
 {
     private readonly ILogger<GetExpensesByUserQueryHandler> _logger = logger;
     private readonly IMapper _mapper = mapper;
     private readonly IExpensesRepository _expenseRepository = expenseRepository;
 
-    public async Task<IEnumerable<ExpenseDto>> Handle(
+    public async Task<Result<IEnumerable<ExpenseDto>>> Handle(
         GetExpensesByUserQuery request, 
         CancellationToken cancellationToken)
     {
@@ -32,7 +33,8 @@ public sealed class GetExpensesByUserQueryHandler(
             "Retrieved {Count} expenses for UserId: {UserId}",
             expenses.Count, request.UserId);
 
-        return _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+        var expenseDtos = _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+
+        return Result<IEnumerable<ExpenseDto>>.Ok(expenseDtos);
     }
 }
-   
