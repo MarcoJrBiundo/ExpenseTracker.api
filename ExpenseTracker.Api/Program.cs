@@ -5,8 +5,14 @@ using ExpenseTracker.Application.Extensions;
 using Serilog;
 using FluentValidation.AspNetCore;
 using ExpenseTracker.Api.Middlewares;
+using ExpenseTracker.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ExpenseDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("ExpenseTrackerDb")));
 
 builder.Services.AddControllers(); 
 builder.Services.AddFluentValidationAutoValidation();     

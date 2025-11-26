@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Infrastructure.Persistence;
 
-public class ExpensesDbContext(DbContextOptions<ExpensesDbContext> options) : DbContext(options)
+public sealed class ExpenseDbContext(DbContextOptions<ExpenseDbContext> options) : DbContext(options)
 {
-    public DbSet<Expense> Expenses { get; set; }
+    public DbSet<Expense> Expenses { get; set; } = default!;
 
     
 

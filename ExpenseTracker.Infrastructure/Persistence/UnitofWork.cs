@@ -4,9 +4,9 @@ namespace ExpenseTracker.Infrastructure.Persistence;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly ExpensesDbContext _dbContext;
+    private readonly ExpenseDbContext _dbContext;
 
-    public UnitOfWork(ExpensesDbContext dbContext)
+    public UnitOfWork(ExpenseDbContext dbContext)
     {
         _dbContext = dbContext;
     }

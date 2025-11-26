@@ -67,11 +67,10 @@ namespace ExpenseTracker.Api.Controllers
             if (!result.Success)
                 return BadRequest(result.ErrorMessage);
 
-            return CreatedAtAction(
-                nameof(GetExpenseByIdAsync),
-                new { userId, expenseId = result.Data!.Id },
-                result.Data);
-    
+            return CreatedAtRoute(
+                routeName: "GetExpenseById",               
+                routeValues: new { userId, expenseId = result.Data!.Id },
+                value: result.Data);
         }
 
         [HttpPut("{expenseId:guid}")]

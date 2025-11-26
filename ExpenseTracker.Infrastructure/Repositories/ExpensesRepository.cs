@@ -3,15 +3,16 @@ using System.Linq;
 using ExpenseTracker.Domain.Entities;
 using ExpenseTracker.Domain.Repositories;
 using ExpenseTracker.Infrastructure.Persistence;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Infrastructure.Repositories;
 
 public class ExpensesRepository : IExpensesRepository
 {
-    private readonly ExpensesDbContext _dbContext;
+    private readonly ExpenseDbContext _dbContext;
 
-    public ExpensesRepository(ExpensesDbContext dbContext)
+    public ExpensesRepository(ExpenseDbContext dbContext)
     {
         _dbContext = dbContext; 
     }
@@ -45,4 +46,15 @@ public class ExpensesRepository : IExpensesRepository
        IReadOnlyList<Expense> expense = await _dbContext.Expenses.Where(e => e.UserId == userId).AsNoTracking().ToListAsync(cancellationToken);
        return expense; 
     }
+
+    public async Task<IReadOnlyList<Expense>> GetExpensesByUserViaStoredProcAsync( Guid userId, CancellationToken cancellationToken = default)
+{
+    var userIdParam = new SqlParameter("@UserId", userId);
+
+    var query = _dbContext.Expenses
+        .FromSqlRaw("EXEC [dbo].[sp_GetExpensesByUser] @UserId", userIdParam)
+        .AsNoTracking();
+
+    return await query.ToListAsync(cancellationToken);
+}
 }

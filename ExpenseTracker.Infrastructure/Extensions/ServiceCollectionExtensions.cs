@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
         var connectionString = configuration.GetConnectionString("ExpenseTrackerDb")
             ?? throw new InvalidOperationException("Connection string 'ExpenseTrackerDb' not found.");
 
-       services.AddDbContext<ExpensesDbContext>(options =>
+       services.AddDbContext<ExpenseDbContext>(options =>
         {
             options.UseSqlServer(connectionString);
         });

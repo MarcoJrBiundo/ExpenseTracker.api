@@ -1,0 +1,1 @@
+docker run -e ACCEPT_EULA=Y -e SA_PASSWORD="Your_password123\!" -p 1433:1433 --name expense-sql -d mcr.microsoft.com/mssql/server:2022-latest

@@ -2,14 +2,9 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ExpenseTracker.Domain.Entities;
-using ExpenseTracker.Infrastructure.Persistence;
-using ExpenseTracker.Infrastructure.Repositories;
 using ExpenseTracker.Infrastructure.Tests.Builders;
 using ExpenseTracker.Infrastructure.Tests.Db;
-using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
 
 namespace ExpenseTracker.Infrastructure.Tests.Repositories;
 

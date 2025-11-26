@@ -29,6 +29,11 @@ public sealed class GetExpensesByUserQueryHandler(
             .GetExpensesByUserAsync(request.UserId, cancellationToken))
             .ToList();
 
+        //Alternative method using stored procedure
+        // var expenses = (await _expenseRepository
+        //     .GetExpensesByUserViaStoredProcAsync(request.UserId, cancellationToken))
+        //     .ToList();    
+
         _logger.LogInformation(
             "Retrieved {Count} expenses for UserId: {UserId}",
             expenses.Count, request.UserId);
