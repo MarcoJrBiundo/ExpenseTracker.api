@@ -11,58 +11,50 @@ Below is the standard folder structure and what each part is for.
 ---
 
 ## Folder structure
-
-`Common` - Shared building blocks used across all features.
-- `Behaviours`
-  - `ValidationBehavior.cs`  
-    - A MediatR pipeline behavior that:
-      - Runs all FluentValidation validators for a request before it reaches the handler.
-      - Short‑circuits the pipeline and returns a validation error result if any rules fail.
-- `Results`
-  - `Result.cs` - A simple result wrapper used by handlers, e.g.:
-
-
-`<Entity>`-(one folder per business entity / aggregate) Replace `<Entity>` with the actual entity name,
-
-`Commands/`- Commands represent **operations that change state** (write operations). - For each command, create a dedicated folder:
-  - `Delete<Entity>/`
-    - `Delete<Entity>Command.cs` - The MediatR request that contains the data needed to delete the entity
-    - `Delete<Entity>CommandHandler.cs`- The MediatR handler that coordinates the delete operation using repositories
-    - `Delete<Entity>CommandValidator.cs`FluentValidation validator for the command (e.g. required IDs, valid formats).
-  - `Update<Entity>/`
-    - `Update<Entity>Command.cs`
-    - `Update<Entity>CommandHandler.cs`
-    - `Update<Entity>CommandValidator.cs`
-  - `Create<Entity>/`
-    - `Create<Entity>Command.cs`
-    - `Create<Entity>CommandHandler.cs`
-    - `Create<Entity>CommandValidator.cs`
-- `Dtos/`
-  - `Create<Entity>RequestDto.cs`- Shape of the request body for creating an entity.
-
-`Mappings`- AutoMapper profiles that map between:
-- DTOs ↔ Commands
-- Domain entities ↔ DTOs
-- Domain entities ↔ Query results
-- `Mappings/`
-  - `<Entity>Profile.cs`  
-    - An AutoMapper `Profile` that configures all mappings related to `<Entity>`.
-
-`Queries` - Queries represent **read‑only operations** (no state changes). For each query, create a dedicated folder:
-- `Queries/`
-  - `Get<Entity>/`
-    - `Get<Entity>ByIdQuery.cs`  - The MediatR request object (e.g. contains `Id`, `UserId`).
-    - `Get<Entity>ByIdQueryHandler.cs` - The MediatR handler that reads data (via repository) and maps it to a DTO or result.
-    - `Get<Entity>ByIdQueryValidator.cs`- FluentValidation validator for query parameters.
-
-`Extensions`- Typically you will have an `Extensions` folder (or a `ServiceCollectionExtensions.cs` in the root of the Application project) that:
-
-- Registers MediatR handlers from this assembly.
-- Registers AutoMapper profiles from this assembly.
-- Registers FluentValidation validators.
-- Adds pipeline behaviors like `ValidationBehavior`.
-
-
+```
+Application
+│
+├── Common/ – Shared building blocks used across all features
+│ ├── Behaviours/
+│ │ └── ValidationBehavior.cs – MediatR pipeline behavior,  Executes all FluentValidation validators before the handler, short-circuits the pipeline and returns validation errors if any rules fail
+│ │
+│ └── Results/
+│   └── Result.cs – Standard result wrapper returned by handlers
+│
+├── <Entity>/ – One folder per business entity/aggregate
+│ ├── Commands/ – Write operations (state-changing)
+│ │ ├── Create<Entity>/
+│ │ │ ├── Create<Entity>Command.cs – MediatR request for creating the entity
+│ │ │ ├── Create<Entity>CommandHandler.cs – Handler orchestrating the create operation
+│ │ │ └── Create<Entity>CommandValidator.cs – FluentValidation rules
+│ │ │
+│ │ ├── Update<Entity>/
+│ │ │ ├── Update<Entity>Command.cs
+│ │ │ ├── Update<Entity>CommandHandler.cs
+│ │ │ └── Update<Entity>CommandValidator.cs
+│ │ │
+│ │ └── Delete<Entity>/
+│ │ ├── Delete<Entity>Command.cs
+│ │ ├── Delete<Entity>CommandHandler.cs
+│ │ └── Delete<Entity>CommandValidator.cs
+│ │
+│ ├── Dtos/
+│ │ └── Create<Entity>RequestDto.cs – Request body shape for creating the entity
+│ │
+│ ├── Mappings/
+│ │ └── <Entity>Profile.cs – AutoMapper profile for: DTOs ↔ Commands, Domain entities ↔ DTOs, Domain entities ↔ Query results
+│ │
+│ └── Queries/ – Read-only operations
+│   └── Get<Entity>/
+│     ├── Get<Entity>ByIdQuery.cs – MediatR query (contains parameters like Id, UserId)
+│     ├── Get<Entity>ByIdQueryHandler.cs – Handler that fetches entity and maps to DTO/result
+│     └── Get<Entity>ByIdQueryValidator.cs – FluentValidation for query parameters
+│
+├── Extensions/
+│ └── ServiceCollectionExtensions.cs – Application-layer DI registration, Registers all MediatR handlers, Registers AutoMapper profiles, Registers FluentValidation validators, Adds pipeline behaviors (e.g., ValidationBehavior)
+│
+└── 
+```
 
 ---
 ## Required NuGet packages
