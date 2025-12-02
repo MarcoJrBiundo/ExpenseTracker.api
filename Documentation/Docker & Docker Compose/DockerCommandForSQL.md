@@ -1,7 +1,9 @@
+##Docker Commands
+
 This file documents the key Docker commands used (or typically needed) to:
 Container name used below: `entity-sql`
 Image used: `mcr.microsoft.com/mssql/server:2022-latest`
----
+
 
 ## 1️⃣ Create & Run the SQL Server Container
 This is the main command to spin up a local SQL Server instance in Docker:
