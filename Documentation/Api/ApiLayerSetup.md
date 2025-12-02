@@ -1,4 +1,5 @@
-# API Layer Setup
+## API Layer Setup
+
 The API (Presentation) Layer is the entry point of the entire application.  
 It exposes HTTP endpoints, accepts incoming requests, validates and translates data, and delegates all business operations to the Application layer.  
 It should contain zero business logic and zero data access logic — its responsibility is purely presentation, routing, and orchestration.
