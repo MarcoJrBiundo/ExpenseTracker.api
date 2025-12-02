@@ -1,7 +1,7 @@
-## Set up Folder Structure 
-## 📁 Folder Structure
+## Domain Layer Setup
 
-```text
+## 📁 Folder Structure
+```
 Domain
  ├── Common
  │    └── BaseEntity.cs
@@ -53,7 +53,9 @@ BaseEntity is an abstract domain base class that all entities inherit from. It s
 
 ## Set up interfaces for repositories, one per entity.
 
-## Set up one IUnitOfWork interface. This should typically expose a single SaveChangesAsync (or SaveChanges) method, representing an atomic commit of all pending changes. Repositories should focus on manipulating aggregates (adding, removing, updating entities), while the UnitOfWork coordinates the final commit by calling the underlying DbContext. The DbContext can then handle setting CreatedAt and UpdatedAt for all tracked entities in one place (e.g., in an overridden SaveChangesAsync).
+## Set up one IUnitOfWork interface.
+
+This should typically expose a single SaveChangesAsync (or SaveChanges) method, representing an atomic commit of all pending changes. Repositories should focus on manipulating aggregates (adding, removing, updating entities), while the UnitOfWork coordinates the final commit by calling the underlying DbContext. The DbContext can then handle setting CreatedAt and UpdatedAt for all tracked entities in one place (e.g., in an overridden SaveChangesAsync).
 
 ---
 
